@@ -1,0 +1,58 @@
+<div class="form-color">
+<mat-toolbar style="min-height:30px" color="primary">
+    <span>{{service.form.controls['$key'].value? "Modify Detials":"New Vehicle"}}</span>
+    <span class="fill-remaining-space"></span>
+    <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+        <mat-icon>clear</mat-icon>
+    </button>
+</mat-toolbar>
+<form [formGroup]="service.form" class="normal-form" (submit)="onSubmit()">
+    <mat-grid-list cols="1" rowHeight="395px">
+        <mat-grid-tile>
+            <div class="controles-container">
+                <input type="hidden" formControlName="$key">
+                Year:
+                <mat-form-field appearance="outline">
+                    <mat-select (selectionChange)="selectYear()" formControlName="year" placeholder="Year">
+                        <ng-container *ngFor="let chooseYear of yearList">
+                            <mat-option value="{{chooseYear}}">{{chooseYear}}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                Make:
+                <mat-form-field appearance="outline">
+                    <mat-select (selectionChange)="selectMake($event)" formControlName="make" placeholder="Make">
+                        <ng-container *ngFor="let chooseMake of makeList">
+                            <mat-option value="{{chooseMake}}">{{chooseMake}}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                </mat-form-field><br>
+                Model:
+                <mat-form-field appearance="outline">
+                    <mat-select (selectionChange)="selectModel()" formControlName="model" placeholder="Model">
+                        <ng-container *ngFor="let chooseModel of modelList">
+                            <mat-option value="{{chooseModel.value}}">{{chooseModel.value}}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                </mat-form-field><br>
+                Body Style:
+                <mat-form-field appearance="outline">
+                    <mat-select (selectionChange)="selectStyle()" formControlName="bodyStyle" placeholder="Body Style">
+                        <ng-container *ngFor="let chooseStyle of stylesList">
+                            <mat-option value="{{chooseStyle}}">{{chooseStyle}}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                </mat-form-field>
+                <div class="button-row">
+                    <button mat-raised-button color="primary" type="submit" [disabled]="disableForm">Submit</button>
+                    <button mat-raised-button color="warn" (click)="onClose()">Cancel</button>
+                </div>
+                <!-- <div class="button-row"> -->
+                    
+                <!-- </div> -->
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</form>
+</div>
